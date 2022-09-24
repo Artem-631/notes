@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <style>
+        .notes {
+            width: 400px;
+            height: 400px;
+        }
+        .note {
+            width: 350px;
+            height: 350px;
+            resize: none;
+        }
+        input {
+            width: 350px;
+            height: 50px;
+        }
+        .user {
+            position: absolute;
+            top: 20px;
+            right: 50px;
+            font-size: 20px;
+            
+        }
+        .entrance {
+            width: 100px;
+            height: 50px;
+            border-radius: 20px;
+            position: absolute;
+            right: 150px;
+            background: #00BFFF;
+        }
+        .registration {
+            width: 100px;
+            height: 50px;
+            border-radius: 20px;
+            position: absolute;
+            right: 20px;
+            background: #00BFFF;
+        }
+        #span {
+            /* width: 100px;
+            height: 50px; */
+            font-size: 24px;
+            position: absolute;
+            right: 350px;
+            background: #00BFFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <span id="span"></span>
+        <button class="entrance">Войти</button>
+        <button class="registration">Регистрация</button>
+        <div class="user"></div>
+        <div class="notes">
+            <form method="POST">
+                <textarea class="note" name="notes-text" placeholder="Напишите что-нибудь"></textarea>
+                <input type="submit" value="Сохранить заметку">
+            </form>
+        </div>
+    </div>
+    <script>
+        document.querySelector(".registration").onclick=() => {
+            window.open("registration.php")
+        }
+        document.querySelector(".entrance").onclick=() => {
+            window.open("entrance.php")
+        }
+        //let span=document.getElementById("span")
+        let url="http://phpfiles/Notes/info.json"
+        let xhr=new XMLHttpRequest()
+        xhr.open("GET", url)
+        //xhr.responseType="json"
+        xhr.onload=() => {
+            let result=JSON.parse(xhr.response)
+            span.innerHTML=result[0]["login"]+result[0]["id"]
+        }
+        xhr.send()
+    </script>
+</body>
+</html>
